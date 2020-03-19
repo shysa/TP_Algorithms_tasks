@@ -84,7 +84,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task3.cpp">
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task4.cpp">
 			<Option target="TP_DATA"/>
 		</Unit>
 		<Unit filename="/home/shysa/CLionProjects/TP-DATA/CMakeLists.txt">

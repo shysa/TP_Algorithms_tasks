@@ -1,11 +1,11 @@
 #include <iostream>
 //
-// Created by shysa on 12.03.2020.
+// Created by shysa on 11.03.2020.
 //
 template <typename T>
 class Queue {
 public:
-    Queue(): data(nullptr), head(0), tail(0), size(0), capacity(0) { Resize(); }
+    Queue(): data(nullptr), head(0), tail(0), size(0) { Resize(); }
     ~Queue() {
         if (data) {
             delete[] data;
@@ -44,7 +44,10 @@ public:
 
         if (head != tail) {
             unsigned int j = 0;
-            for (unsigned int i = head; i < size || i + 1 != tail; i++) {
+            for (unsigned int i = head; i < size; i++) {
+                if (i == tail) {
+                    break;
+                }
                 newData[j++] = data[i];
 
                 if (i == size - 1){
@@ -64,17 +67,16 @@ public:
     }
 
     void ShowQueue() {
-        printf("[%d:%d:%d]==========\n", head, tail, size);
-        for(int i = head; i < size; i++) {
-            if(i == tail) { // элемент следующий после последнего
+        std::cout << "[head " << head << " : tail " << tail << " : size " << size << "]\n";
+        for (int i = head; i < size; i++) {
+            if (i == tail) {
                 break;
             }
-            printf("[%d] => %d\n", i, data[i]);
-            if(i == size - 1) {
+            std::cout << i << " : " << data[i] << std::endl;
+            if (i == size - 1) {
                 i = -1;
             }
         }
-        printf("/==========\n");
     }
 
     bool IsEmpty() {
@@ -86,31 +88,40 @@ private:
     int head;
     int tail;
     unsigned int size;
-    unsigned int capacity;
 };
 
 
 int main() {
     Queue <int>queue;
 
-    int NumCommands = 0;
-    std::cin >> NumCommands;
+    int n = 0;
+    std::cin >> n;
 
-    int CommandCode = 0;
-    int CommandValue = 0;
+    // a - код команды, b - значение
+    int a = 0;
+    int b = 0;
 
-    for (int i = 0; i < NumCommands; i++) {
-        std::cin >> CommandCode >> CommandValue;
+    bool isOK = true;
 
-        switch (CommandCode) {
+    for (int i = 0; i < n; i++) {
+        std::cin >> a >> b;
+
+        switch (a) {
             case 2:
                 if (queue.IsEmpty()) {
-                    CommandValue = -1;
+                    b = -1;
                 }
+                isOK = (queue.PopFront() == b) && isOK;
+                break;
+            case 3:
+                queue.PushBack(b);
+                break;
+            default:
+                break;
         }
     }
 
-
+    std::cout << (isOK ? "YES" : "NO");
 
     return 0;
 }
