@@ -74,7 +74,7 @@ T Heap<T>::extractMin() {
 
 template <typename T>
 void Heap<T>::resize() {
-    int newCapacity = (capacity > 0)? capacity * 2 : 2;
+    int newCapacity = (capacity > 0)? capacity * 2 : 10;
     T *newArray = new T[newCapacity];
 
     for (int i = 0; i < size; i++) {
