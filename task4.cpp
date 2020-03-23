@@ -4,123 +4,125 @@
 
 #include <iostream>
 
+// ----------------------- TRAIN -----------------------------
 struct Train {
     int arrival;
     int departure;
+
+    friend std::ostream& operator<<(std::ostream &os, const  Train& train) {
+        return std::cout << train.arrival << " : " << train.departure << std::endl;
+    }
+
 };
+bool cmpTrainDeparture(const Train &l, const Train &r) {
+    return l.departure > r.departure;
+}
+bool cmpArrivalAndDepartureTrains(const Train &l, const Train &r) {
+    return l.arrival > r.departure;
+}
 
-// Куча построена на основе динамического массива
-template <typename T>
-class Array {
-public:
-    Array() : data(nullptr), size(0), tail(0) { Resize(); }
-    ~Array() {
-        if (data) {
-            delete[] data;
-        }
-    }
-
-    void Add(T value) {
-        if (tail == size) {
-            Resize();
-            Add(value);
-        } else {
-            data[tail] = value;
-            tail++;
-        }
-    }
-
-    void Resize() {
-        int newSize = (size > 0)? size*2 : 2;
-        T *newData = new T[newSize];
-
-        int j = 0;
-        for (int i = 0; i < size; i++) {
-            newData[j++] = data[i];
-        }
-        tail = j;
-
-        if (data) {
-            delete[] data;
-        }
-
-        data = newData;
-        size = newSize;
-    }
-
-    void ShowArray() {
-        for (int i = 0; i < size; i++) {
-            std::cout << data[i] << " ";
-        }
-    }
-
-    int Size() const {
-        return size;
-    }
-
-    bool isEmpty() {
-        return (size > 0);
-    }
-
-    T &operator[] (int i) {
-        return data[i];
-    }
-
-private:
-    T *data;
-    int tail;
-    int size;
-};
-
-
+// -------------------- HEAP CLASS ---------------------------
 template <class T>
 class Heap {
 public:
-    Heap<T>(): array() {}
-    //explicit Heap(const T& _arr);
-    ~Heap() {}
-
-    void Insert(T element);
-    void Show() {
-        for (int i = 0; i < array.Size(); i++) {
-            std::cout << array[i] << " ";
-        }
+    Heap<T>(): array(nullptr), size (0), capacity(0) {}
+    ~Heap() {
+        delete[] array;
     }
-    //T ExtractMax();
-    //T PeekMax() const;
+
+    void insert(T element);
+    T extractMin();
+    T peekMin() const;
+    bool isEmpty() const {
+        return (size == 0);
+    }
+    int getSize() {
+        return size;
+    }
 
 private:
-    Array<T> array;
+    T * array;
+    int size;
+    int capacity;
 
-    void siftDown(int index);
-    void siftUp(int index);
+    void siftDown(int index, bool (*cmp)(const Train&, const Train&));
+    void siftUp(int index, bool (*cmp)(const Train&, const Train&));
+    void resize();
 };
 
 template <typename T>
-void Heap<T>::siftDown(int index) {
+T Heap<T>::peekMin() const {
+    if (!isEmpty()) {
+        return array[0];
+    }
+}
+
+template <typename T>
+T Heap<T>::extractMin() {
+    if (!isEmpty()) {
+        T result = array[0];
+        array[0] = array[size - 1];
+
+        size--;
+
+        if (!isEmpty()) {
+            siftDown(0, cmpTrainDeparture);
+        }
+        return result;
+    }
+}
+
+template <typename T>
+void Heap<T>::resize() {
+    int newCapacity = (capacity > 0)? capacity * 2 : 2;
+    T *newArray = new T[newCapacity];
+
+    for (int i = 0; i < size; i++) {
+        newArray[i] = array[i];
+    }
+    delete[] array;
+
+    array = newArray;
+    capacity = newCapacity;
+
+}
+
+template <typename T>
+void Heap<T>::insert(T element) {
+    if (size == capacity) {
+        resize();
+    }
+
+    array[size] = element;
+    size++;
+    siftUp(size - 1, cmpTrainDeparture);
+}
+
+template <typename T>
+void Heap<T>::siftDown(int index, bool (*cmp)(const Train&, const Train&)) {
     int left = 2 * index + 1;
     int right = 2 * index + 2;
 
     // больший потомок
     int largest = index;
-    if (left < array.Size() && array[left] > array[index]) {
+    if ( left < size && !(cmp(array[left], array[right])) ) {
         largest = left;
     }
-    if (right < array.Size() && array[right] > array[largest]) {
+    if ( right < size && (cmp(array[left], array[right])) ) {
         largest = right;
     }
 
     if (largest != index) {
         std::swap(array[index], array[largest]);
-        siftDown(largest);
+        siftDown(largest, cmp);
     }
 }
 
 template <typename T>
-void Heap<T>::siftUp(int index) {
+void Heap<T>::siftUp(int index, bool (*cmp)(const Train&, const Train&)) {
     while (index > 0) {
         int parent = (index - 1) / 2;
-        if (array[index] <= array[parent]) {
+        if (cmp(array[index], array[parent])) {
             return;
         }
         std::swap(array[index], array[parent]);
@@ -128,26 +130,41 @@ void Heap<T>::siftUp(int index) {
     }
 }
 
-template <typename T>
-void Heap<T>::Insert(T element) {
-    array.Add(element);
-    siftUp(array.Size() - 1);
+// -------------------- TASK ---------------------------
+int CountDeadlocks(int n) {
+    int minDeadlocks = 0;
+
+    Heap<Train> heap;
+    auto * train = new Train;
+
+    for (int i = 0; i < n; i++) {
+        std::cin >> train->arrival >> train->departure;
+
+        if (!heap.isEmpty()) {
+            // извлекаем всех, кто уже уехал к моменту прибытия текущей электрички
+            while (cmpArrivalAndDepartureTrains(*train, heap.peekMin())) {
+                heap.extractMin();
+            }
+        }
+        heap.insert(*train);
+
+        if (heap.getSize() > minDeadlocks) {
+            minDeadlocks = heap.getSize();
+        }
+    }
+
+    delete train;
+    return minDeadlocks;
 }
-
-
 
 
 int main() {
     int n = 0;
     std::cin >> n;
 
-    Heap<int> heap;
+    int minDeadlocks = CountDeadlocks(n);
 
-    for (int i = 0; i < n; i++) {
-
-    }
-
-
+    std::cout << minDeadlocks;
 
     return 0;
 }
