@@ -123,32 +123,32 @@ TP_DATA/fast:
 	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/build
 .PHONY : TP_DATA/fast
 
-task5.o: task5.cpp.o
+task4.o: task4.cpp.o
 
-.PHONY : task5.o
+.PHONY : task4.o
 
 # target to build an object file
-task5.cpp.o:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task5.cpp.o
-.PHONY : task5.cpp.o
+task4.cpp.o:
+	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task4.cpp.o
+.PHONY : task4.cpp.o
 
-task5.i: task5.cpp.i
+task4.i: task4.cpp.i
 
-.PHONY : task5.i
+.PHONY : task4.i
 
 # target to preprocess a source file
-task5.cpp.i:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task5.cpp.i
-.PHONY : task5.cpp.i
+task4.cpp.i:
+	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task4.cpp.i
+.PHONY : task4.cpp.i
 
-task5.s: task5.cpp.s
+task4.s: task4.cpp.s
 
-.PHONY : task5.s
+.PHONY : task4.s
 
 # target to generate assembly for a file
-task5.cpp.s:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task5.cpp.s
-.PHONY : task5.cpp.s
+task4.cpp.s:
+	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task4.cpp.s
+.PHONY : task4.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... TP_DATA"
 	@echo "... edit_cache"
-	@echo "... task5.o"
-	@echo "... task5.i"
-	@echo "... task5.s"
+	@echo "... task4.o"
+	@echo "... task4.i"
+	@echo "... task4.s"
 .PHONY : help
 
 

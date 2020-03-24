@@ -30,11 +30,11 @@ public:
         delete[] array;
     }
 
-    void insert(T element);
+    void insert(T& element);
     T extractMin();
     T peekMin() const;
     bool isEmpty() const {
-        return (size == 0);
+        return size == 0;
     }
     int getSize() {
         return size;
@@ -88,7 +88,7 @@ void Heap<T>::resize() {
 }
 
 template <typename T>
-void Heap<T>::insert(T element) {
+void Heap<T>::insert(T& element) {
     if (size == capacity) {
         resize();
     }
@@ -103,18 +103,19 @@ void Heap<T>::siftDown(int index, bool (*cmp)(const Train&, const Train&)) {
     int left = 2 * index + 1;
     int right = 2 * index + 2;
 
-    // больший потомок
-    int largest = index;
-    if ( left < size && !(cmp(array[left], array[right])) ) {
-        largest = left;
+    //меньший потомок
+    int smallest = index;
+
+    if ( left < size && !(cmp(array[left], array[index])) ) {
+        smallest = left;
     }
-    if ( right < size && (cmp(array[left], array[right])) ) {
-        largest = right;
+    if ( right < size && (cmp(array[smallest], array[right])) ) {
+        smallest = right;
     }
 
-    if (largest != index) {
-        std::swap(array[index], array[largest]);
-        siftDown(largest, cmp);
+    if (smallest != index) {
+        std::swap(array[index], array[smallest]);
+        siftDown(smallest, cmp);
     }
 }
 
@@ -135,25 +136,24 @@ int CountDeadlocks(int n) {
     int minDeadlocks = 0;
 
     Heap<Train> heap;
-    auto * train = new Train;
+    Train train{};
 
     for (int i = 0; i < n; i++) {
-        std::cin >> train->arrival >> train->departure;
+        std::cin >> train.arrival >> train.departure;
 
         if (!heap.isEmpty()) {
             // извлекаем всех, кто уже уехал к моменту прибытия текущей электрички
-            while (cmpArrivalAndDepartureTrains(*train, heap.peekMin())) {
+            while (cmpArrivalAndDepartureTrains(train, heap.peekMin()) && !heap.isEmpty()) {
                 heap.extractMin();
             }
         }
-        heap.insert(*train);
+        heap.insert(train);
 
         if (heap.getSize() > minDeadlocks) {
             minDeadlocks = heap.getSize();
         }
     }
 
-    delete train;
     return minDeadlocks;
 }
 

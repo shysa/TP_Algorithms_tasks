@@ -3,4 +3,4 @@ project(TP_DATA)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(TP_DATA task5.cpp)
+add_executable(TP_DATA task4.cpp)

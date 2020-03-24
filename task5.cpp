@@ -1,21 +1,30 @@
 #include <iostream>
 
-struct pair {
+struct point {
     int coord;
     int delta;
+
+    friend std::ostream& operator<<(std::ostream &os, const  point& point) {
+        return std::cout << point.coord << " : " << point.delta << std::endl;
+    }
+    friend std::istream& operator>>(std::ostream &in, point& point) {
+        return std::cin >> point.coord >> point.delta;
+    }
 };
+bool cmpPoint(const point &l, const point &r) {
+    return l.coord <= r.coord;
+}
 
 
-
-template <typename T>
-void Merge (T *array, T *bufArray, int left, int right, int end)
+template <typename T, typename str>
+void Merge (T *array, T *bufArray, int left, int right, int end, bool (*cmp)(const str&, const str&))
 {
     int bufIndex = left;
     int leftIndex = left;
     int rightIndex = right;
 
     while (leftIndex < right && rightIndex < end) {
-        if (array[leftIndex] <= array[rightIndex]) {
+        if (cmp(array[leftIndex], array[rightIndex])) {
             bufArray[bufIndex] = array[leftIndex];
             leftIndex++;
         } else {
@@ -40,8 +49,8 @@ void Merge (T *array, T *bufArray, int left, int right, int end)
     }
 }
 
-template <typename T>
-T* MergeSort(T * array, int size) {
+template <typename T, typename str>
+T* MergeSort(T * array, int size, bool (*cmp)(const str&, const str&)) {
     if (size <= 1) {
         return array;
     }
@@ -62,7 +71,7 @@ T* MergeSort(T * array, int size) {
                 rightEnd = size;
             }
 
-            Merge(array, result, left, right, rightEnd);
+            Merge(array, result, left, right, rightEnd, cmp);
         }
     }
     return result;
@@ -72,13 +81,18 @@ T* MergeSort(T * array, int size) {
 
 int main() {
 
-    auto * array = new int[5];
+    auto * array = new point[5];
 
     for (int i = 0; i < 5; i++) {
-        std::cin >> array[i];
+        std::cin >> array[i].delta >> array[i].delta;
     }
 
-    array = MergeSort(array, 5);
+    for (int i = 0; i < 5; i++) {
+        std::cout << array[i] << " ";
+    }
+
+
+    array = MergeSort(array, 5, cmpPoint);
 
     for (int i = 0; i < 5; i++) {
         std::cout << array[i] << " ";

@@ -57,27 +57,27 @@ include CMakeFiles/TP_DATA.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/TP_DATA.dir/flags.make
 
-CMakeFiles/TP_DATA.dir/task5.cpp.o: CMakeFiles/TP_DATA.dir/flags.make
-CMakeFiles/TP_DATA.dir/task5.cpp.o: ../task5.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TP_DATA.dir/task5.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TP_DATA.dir/task5.cpp.o -c /home/shysa/CLionProjects/TP-DATA/task5.cpp
+CMakeFiles/TP_DATA.dir/task4.cpp.o: CMakeFiles/TP_DATA.dir/flags.make
+CMakeFiles/TP_DATA.dir/task4.cpp.o: ../task4.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/TP_DATA.dir/task4.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/TP_DATA.dir/task4.cpp.o -c /home/shysa/CLionProjects/TP-DATA/task4.cpp
 
-CMakeFiles/TP_DATA.dir/task5.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TP_DATA.dir/task5.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shysa/CLionProjects/TP-DATA/task5.cpp > CMakeFiles/TP_DATA.dir/task5.cpp.i
+CMakeFiles/TP_DATA.dir/task4.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TP_DATA.dir/task4.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shysa/CLionProjects/TP-DATA/task4.cpp > CMakeFiles/TP_DATA.dir/task4.cpp.i
 
-CMakeFiles/TP_DATA.dir/task5.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TP_DATA.dir/task5.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shysa/CLionProjects/TP-DATA/task5.cpp -o CMakeFiles/TP_DATA.dir/task5.cpp.s
+CMakeFiles/TP_DATA.dir/task4.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TP_DATA.dir/task4.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shysa/CLionProjects/TP-DATA/task4.cpp -o CMakeFiles/TP_DATA.dir/task4.cpp.s
 
 # Object files for target TP_DATA
 TP_DATA_OBJECTS = \
-"CMakeFiles/TP_DATA.dir/task5.cpp.o"
+"CMakeFiles/TP_DATA.dir/task4.cpp.o"
 
 # External object files for target TP_DATA
 TP_DATA_EXTERNAL_OBJECTS =
 
-TP_DATA: CMakeFiles/TP_DATA.dir/task5.cpp.o
+TP_DATA: CMakeFiles/TP_DATA.dir/task4.cpp.o
 TP_DATA: CMakeFiles/TP_DATA.dir/build.make
 TP_DATA: CMakeFiles/TP_DATA.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable TP_DATA"
