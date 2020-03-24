@@ -2,15 +2,14 @@
 // ----------------------------------- POINT PAIR ---------------------------------------
 struct Point {
     int coord{};
-    //int delta = -1;
-    int delta;
+    int delta = -1;
 
     friend std::ostream& operator<<(std::ostream &os, const  Point& point) {
         return std::cout << "[" << point.coord << ":" << point.delta << "]" << " ";
     }
     friend std::istream& operator>>(std::istream &in, Point& point) {
-        //point.delta *= -1;
-        return std::cin >> point.coord >> point.delta;
+        point.delta *= -1;
+        return std::cin >> point.coord;
     }
 };
 bool cmpPoint(const Point &l, const Point &r) {
@@ -79,13 +78,14 @@ void Array<T>::resize() {
 
 // ----------------------------------- MERGE SORT ---------------------------------------
 template <typename T>
-void Merge(T *array, T *buffer, int left, int right, int end) {
+void Merge(T *array, T *buffer, int left, int right, int end, bool (*cmp)(const T&, const T&)) {
     int bufIndex = left;
     int i = left;
     int j = right;
 
     while (i < right && j < end) {
-        if (array[i] <= array[j]) {
+        //if (array[i] <= array[j]) {
+        if ( cmp(array[i], array[j]) ) {
             buffer[bufIndex] = array[i];
             i++;
         } else {
@@ -112,7 +112,7 @@ void Merge(T *array, T *buffer, int left, int right, int end) {
 }
 
 template <typename T>
-void MergeSort(T *array, int size) {
+void MergeSort(T *array, int size, bool (*cmp)(const T&, const T&)) {
     T *buffer = new T[size];
 
     int right;
@@ -129,7 +129,7 @@ void MergeSort(T *array, int size) {
                 rightEnd = size;
             }
 
-            Merge(array, buffer, left, right, rightEnd);
+            Merge(array, buffer, left, right, rightEnd, cmp);
         }
     }
 }
@@ -161,21 +161,18 @@ int main() {
     }
 */
 
-    auto * array = new int[5];
+    auto * array = new Point[5];
 
     for (int i = 0; i < 5; i++) {
         std::cin >> array[i];
     }
 
-
-
     for (int i = 0; i < 5; i++) {
-        std::cout << array[i] << " ";
+        std::cout << array[i];
     }
     std::cout<<std::endl;
 
-    //array = MergeSort(array, 5);
-    MergeSort(array, 5);
+    MergeSort(array, 5, cmpPoint);
 
     for (int i = 0; i < 5; i++) {
         std::cout << array[i];
