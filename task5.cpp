@@ -2,14 +2,15 @@
 // ----------------------------------- POINT PAIR ---------------------------------------
 struct Point {
     int coord{};
-    int delta = -1;
+    //int delta = -1;
+    int delta;
 
     friend std::ostream& operator<<(std::ostream &os, const  Point& point) {
-        return std::cout << "[" << point.coord << ":" << point.delta << "]" <<std::endl;
+        return std::cout << "[" << point.coord << ":" << point.delta << "]" << " ";
     }
     friend std::istream& operator>>(std::istream &in, Point& point) {
-        point.delta *= -1;
-        return std::cin >> point.coord;
+        //point.delta *= -1;
+        return std::cin >> point.coord >> point.delta;
     }
 };
 bool cmpPoint(const Point &l, const Point &r) {
@@ -78,89 +79,107 @@ void Array<T>::resize() {
 
 // ----------------------------------- MERGE SORT ---------------------------------------
 template <typename T>
-void Merge (Array<T> &array, Array<T> &bufArray, int left, int right, int end, bool (*cmp)(const T&, const T&)) {
+void Merge(T *array, T *buffer, int left, int right, int end) {
     int bufIndex = left;
-    int leftIndex = left;
-    int rightIndex = right;
+    int i = left;
+    int j = right;
 
-
-    while (leftIndex < right && rightIndex < end) {
-        if (cmp(array[leftIndex], array[rightIndex])) {
-            bufArray[bufIndex] = array[leftIndex];
-            leftIndex++;
+    while (i < right && j < end) {
+        if (array[i] <= array[j]) {
+            buffer[bufIndex] = array[i];
+            i++;
         } else {
-            bufArray[bufIndex] = array[rightIndex];
-            rightIndex++;
+            buffer[bufIndex] = array[j];
+            j++;
         }
         bufIndex++;
     }
 
-    // если закончился какой-то массив, доливаем оставшийся
-    // остались элементы в левом массиве
-    while (leftIndex < right) {
-        bufArray[bufIndex] = array[leftIndex];
-        leftIndex++;
+    while (i < right) {
+        buffer[bufIndex] = array[i];
+        i++;
         bufIndex++;
     }
-    // или в правом
-    while (rightIndex < end) {
-        bufArray[bufIndex] = array[rightIndex];
-        rightIndex++;
+    while (j < end) {
+        buffer[bufIndex] = array[j];
+        j++;
         bufIndex++;
+    }
+
+    for (bufIndex = left; bufIndex < end; bufIndex++) {
+        array[bufIndex] = buffer[bufIndex];
     }
 }
 
-template <class T>
-void MergeSort(Array<T> &array, int size, bool (*cmp)(const T&, const T&)) {
-
-    Array<T> result(size);
+template <typename T>
+void MergeSort(T *array, int size) {
+    T *buffer = new T[size];
 
     int right;
     int rightEnd;
-    int k;
 
-    for (k = 1; k < size; k += 2) {
+    for (int k = 1; k < size; k *= 2 ) {
         //разбиение на подмассивы 2^k
-        for (int left = 0; left + k < size; left += k * 2) {
+        for (int left = 0; left + k < size; left += k * 2 ) {
             right = left + k;
             rightEnd = right + k;
 
-            //не выходим за пределы подмассива
+            //не выходим за границы подмассива
             if (rightEnd > size) {
                 rightEnd = size;
             }
 
-            Merge(array, result, left, right, rightEnd, cmp);
+            Merge(array, buffer, left, right, rightEnd);
         }
     }
-    result.show();
 }
-
 
 int main() {
     int n;
 
-    Array<Point> array;
+    /*Array<Point> array;
     Point point{};
 
     n = 2;
+    auto * arr = new Point[2*n];
     //std::cin >> n;
 
     //у каждого отрезка по 2 координаты-точки => 2n
     for (int i = 0; i < 2 * n; i++) {
         std::cin >> point;
+        arr[i] = point;
         array.insert(point);
     }
 
     array.show();
     std::cout<<std::endl;
 
-    MergeSort(array, 2*n, cmpPoint);
+    arr = MergeSort(arr, 2*n, cmpPoint);
+
+    for (int i = 0; i < 2 * n; i++) {
+        std::cout << arr[i];
+    }
+*/
+
+    auto * array = new int[5];
+
+    for (int i = 0; i < 5; i++) {
+        std::cin >> array[i];
+    }
+
+
+
+    for (int i = 0; i < 5; i++) {
+        std::cout << array[i] << " ";
+    }
     std::cout<<std::endl;
 
-    array.show();
+    //array = MergeSort(array, 5);
+    MergeSort(array, 5);
 
-
+    for (int i = 0; i < 5; i++) {
+        std::cout << array[i];
+    }
 
     return 0;
 }
