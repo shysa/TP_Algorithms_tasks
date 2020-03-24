@@ -1,27 +1,88 @@
 #include <iostream>
+// ----------------------------------- POINT PAIR ---------------------------------------
+struct Point {
+    int coord{};
+    int delta = -1;
 
-struct point {
-    int coord;
-    int delta;
-
-    friend std::ostream& operator<<(std::ostream &os, const  point& point) {
-        return std::cout << point.coord << " : " << point.delta << std::endl;
+    friend std::ostream& operator<<(std::ostream &os, const  Point& point) {
+        return std::cout << "[" << point.coord << ":" << point.delta << "]" <<std::endl;
     }
-    friend std::istream& operator>>(std::ostream &in, point& point) {
-        return std::cin >> point.coord >> point.delta;
+    friend std::istream& operator>>(std::istream &in, Point& point) {
+        point.delta *= -1;
+        return std::cin >> point.coord;
     }
 };
-bool cmpPoint(const point &l, const point &r) {
+bool cmpPoint(const Point &l, const Point &r) {
     return l.coord <= r.coord;
 }
 
+// ----------------------------------- DYNAMIC ARRAY ---------------------------------------
+template <typename T>
+class Array {
+public:
+    Array<T>(): array(nullptr), size (0), capacity(0) {}
+    explicit Array<T>(int n): size (n), capacity(n) {
+        array = new T[n];
+    }
+    ~Array() {
+        delete[] array;
+    }
 
-template <typename T, typename str>
-void Merge (T *array, T *bufArray, int left, int right, int end, bool (*cmp)(const str&, const str&))
-{
+    T& operator [](int index) {
+        return array[index];
+    }
+
+    void insert(T& element);
+    void show() {
+        for (int i = 0; i < size; i++) {
+            std::cout << array[i];
+        }
+    }
+    bool isEmpty() const {
+        return size == 0;
+    }
+    int getSize() {
+        return size;
+    }
+
+private:
+    T *array;
+    int size;
+    int capacity;
+
+    void resize();
+};
+
+template <typename T>
+void Array<T>::insert(T &element){
+    if (size == capacity) {
+        resize();
+    }
+    array[size] = element;
+    size++;
+}
+
+template <typename T>
+void Array<T>::resize() {
+    int newCapacity = (capacity > 0)? capacity * 2 : 2;
+    T *newArray = new T[newCapacity];
+
+    for (int i = 0; i < size; i++) {
+        newArray[i] = array[i];
+    }
+    delete[] array;
+
+    array = newArray;
+    capacity = newCapacity;
+}
+
+// ----------------------------------- MERGE SORT ---------------------------------------
+template <typename T>
+void Merge (Array<T> &array, Array<T> &bufArray, int left, int right, int end, bool (*cmp)(const T&, const T&)) {
     int bufIndex = left;
     int leftIndex = left;
     int rightIndex = right;
+
 
     while (leftIndex < right && rightIndex < end) {
         if (cmp(array[leftIndex], array[rightIndex])) {
@@ -49,13 +110,11 @@ void Merge (T *array, T *bufArray, int left, int right, int end, bool (*cmp)(con
     }
 }
 
-template <typename T, typename str>
-T* MergeSort(T * array, int size, bool (*cmp)(const str&, const str&)) {
-    if (size <= 1) {
-        return array;
-    }
+template <class T>
+void MergeSort(Array<T> &array, int size, bool (*cmp)(const T&, const T&)) {
 
-    T* result = new T[size];
+    Array<T> result(size);
+
     int right;
     int rightEnd;
     int k;
@@ -74,29 +133,33 @@ T* MergeSort(T * array, int size, bool (*cmp)(const str&, const str&)) {
             Merge(array, result, left, right, rightEnd, cmp);
         }
     }
-    return result;
+    result.show();
 }
 
 
-
 int main() {
+    int n;
 
-    auto * array = new point[5];
+    Array<Point> array;
+    Point point{};
 
-    for (int i = 0; i < 5; i++) {
-        std::cin >> array[i].delta >> array[i].delta;
+    n = 2;
+    //std::cin >> n;
+
+    //у каждого отрезка по 2 координаты-точки => 2n
+    for (int i = 0; i < 2 * n; i++) {
+        std::cin >> point;
+        array.insert(point);
     }
 
-    for (int i = 0; i < 5; i++) {
-        std::cout << array[i] << " ";
-    }
+    array.show();
+    std::cout<<std::endl;
 
+    MergeSort(array, 2*n, cmpPoint);
+    std::cout<<std::endl;
 
-    array = MergeSort(array, 5, cmpPoint);
+    array.show();
 
-    for (int i = 0; i < 5; i++) {
-        std::cout << array[i] << " ";
-    }
 
 
     return 0;
