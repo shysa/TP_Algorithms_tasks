@@ -78,7 +78,7 @@ void Array<T>::resize() {
 
 // ----------------------------------- MERGE SORT ---------------------------------------
 template <typename T>
-void Merge(T *array, T *buffer, int left, int right, int end, bool (*cmp)(const T&, const T&)) {
+void Merge(Array<T> &array, T *buffer, int left, int right, int end, bool (*cmp)(const T&, const T&)) {
     int bufIndex = left;
     int i = left;
     int j = right;
@@ -112,7 +112,7 @@ void Merge(T *array, T *buffer, int left, int right, int end, bool (*cmp)(const 
 }
 
 template <typename T>
-void MergeSort(T *array, int size, bool (*cmp)(const T&, const T&)) {
+void MergeSort(Array<T> &array, int size, bool (*cmp)(const T&, const T&)) {
     T *buffer = new T[size];
 
     int right;
@@ -137,9 +137,10 @@ void MergeSort(T *array, int size, bool (*cmp)(const T&, const T&)) {
 int main() {
     int n;
 
-    /*Array<Point> array;
+    Array<Point> array;
     Point point{};
 
+    /*
     n = 2;
     auto * arr = new Point[2*n];
     //std::cin >> n;
@@ -161,22 +162,17 @@ int main() {
     }
 */
 
-    auto * array = new Point[5];
-
     for (int i = 0; i < 5; i++) {
-        std::cin >> array[i];
+        std::cin >> point;
+        array.insert(point);
     }
 
-    for (int i = 0; i < 5; i++) {
-        std::cout << array[i];
-    }
+    array.show();
     std::cout<<std::endl;
 
     MergeSort(array, 5, cmpPoint);
 
-    for (int i = 0; i < 5; i++) {
-        std::cout << array[i];
-    }
+    array.show();
 
     return 0;
 }
