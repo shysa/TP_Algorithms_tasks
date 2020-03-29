@@ -17,6 +17,144 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="TASK_7">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_7" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_7"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_7/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_7" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_7/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_2">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_2"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_2/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_2" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_2/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_3">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_3" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_3"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_3/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_3" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_3/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="rebuild_cache">
 				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
 				<Option type="4"/>
@@ -27,8 +165,8 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="TP_DATA">
-				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TP_DATA" prefix_auto="0" extension_auto="0"/>
+			<Target title="TASK_1">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_1" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -44,14 +182,14 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TP_DATA"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_1"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="TP_DATA/fast">
-				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TP_DATA" prefix_auto="0" extension_auto="0"/>
+			<Target title="TASK_1/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_1" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -67,7 +205,53 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TP_DATA/fast"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_1/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_4">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_4" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_4"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_4/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_4" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_4/fast"/>
 					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -83,9 +267,119 @@
 					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="TASK_6">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_6" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_6"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_6/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_6" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_6/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_5">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_5" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_5"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="TASK_5/fast">
+				<Option output="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/TASK_5" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/shysa/CLionProjects/TP-DATA/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 TASK_5/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/home/shysa/CLionProjects/TP-DATA/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 		</Build>
-		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task5.cpp">
-			<Option target="TP_DATA"/>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task1_4.cpp">
+			<Option target="TASK_1"/>
+		</Unit>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task2_1.cpp">
+			<Option target="TASK_2"/>
+		</Unit>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task3_1.cpp">
+			<Option target="TASK_3"/>
+		</Unit>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task4_3.cpp">
+			<Option target="TASK_4"/>
+		</Unit>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task5_3.cpp">
+			<Option target="TASK_5"/>
+		</Unit>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task6_3.cpp">
+			<Option target="TASK_6"/>
+		</Unit>
+		<Unit filename="/home/shysa/CLionProjects/TP-DATA/task7_3.cpp">
+			<Option target="TASK_7"/>
 		</Unit>
 		<Unit filename="/home/shysa/CLionProjects/TP-DATA/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

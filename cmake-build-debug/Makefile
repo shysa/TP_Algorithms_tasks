@@ -111,44 +111,284 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named TP_DATA
+# Target rules for targets named TASK_7
 
 # Build rule for target.
-TP_DATA: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 TP_DATA
-.PHONY : TP_DATA
+TASK_7: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_7
+.PHONY : TASK_7
 
 # fast build rule for target.
-TP_DATA/fast:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/build
-.PHONY : TP_DATA/fast
+TASK_7/fast:
+	$(MAKE) -f CMakeFiles/TASK_7.dir/build.make CMakeFiles/TASK_7.dir/build
+.PHONY : TASK_7/fast
 
-task5.o: task5.cpp.o
+#=============================================================================
+# Target rules for targets named TASK_2
 
-.PHONY : task5.o
+# Build rule for target.
+TASK_2: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_2
+.PHONY : TASK_2
+
+# fast build rule for target.
+TASK_2/fast:
+	$(MAKE) -f CMakeFiles/TASK_2.dir/build.make CMakeFiles/TASK_2.dir/build
+.PHONY : TASK_2/fast
+
+#=============================================================================
+# Target rules for targets named TASK_3
+
+# Build rule for target.
+TASK_3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_3
+.PHONY : TASK_3
+
+# fast build rule for target.
+TASK_3/fast:
+	$(MAKE) -f CMakeFiles/TASK_3.dir/build.make CMakeFiles/TASK_3.dir/build
+.PHONY : TASK_3/fast
+
+#=============================================================================
+# Target rules for targets named TASK_1
+
+# Build rule for target.
+TASK_1: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_1
+.PHONY : TASK_1
+
+# fast build rule for target.
+TASK_1/fast:
+	$(MAKE) -f CMakeFiles/TASK_1.dir/build.make CMakeFiles/TASK_1.dir/build
+.PHONY : TASK_1/fast
+
+#=============================================================================
+# Target rules for targets named TASK_4
+
+# Build rule for target.
+TASK_4: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_4
+.PHONY : TASK_4
+
+# fast build rule for target.
+TASK_4/fast:
+	$(MAKE) -f CMakeFiles/TASK_4.dir/build.make CMakeFiles/TASK_4.dir/build
+.PHONY : TASK_4/fast
+
+#=============================================================================
+# Target rules for targets named TASK_6
+
+# Build rule for target.
+TASK_6: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_6
+.PHONY : TASK_6
+
+# fast build rule for target.
+TASK_6/fast:
+	$(MAKE) -f CMakeFiles/TASK_6.dir/build.make CMakeFiles/TASK_6.dir/build
+.PHONY : TASK_6/fast
+
+#=============================================================================
+# Target rules for targets named TASK_5
+
+# Build rule for target.
+TASK_5: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TASK_5
+.PHONY : TASK_5
+
+# fast build rule for target.
+TASK_5/fast:
+	$(MAKE) -f CMakeFiles/TASK_5.dir/build.make CMakeFiles/TASK_5.dir/build
+.PHONY : TASK_5/fast
+
+task1_4.o: task1_4.cpp.o
+
+.PHONY : task1_4.o
 
 # target to build an object file
-task5.cpp.o:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task5.cpp.o
-.PHONY : task5.cpp.o
+task1_4.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_1.dir/build.make CMakeFiles/TASK_1.dir/task1_4.cpp.o
+.PHONY : task1_4.cpp.o
 
-task5.i: task5.cpp.i
+task1_4.i: task1_4.cpp.i
 
-.PHONY : task5.i
+.PHONY : task1_4.i
 
 # target to preprocess a source file
-task5.cpp.i:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task5.cpp.i
-.PHONY : task5.cpp.i
+task1_4.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_1.dir/build.make CMakeFiles/TASK_1.dir/task1_4.cpp.i
+.PHONY : task1_4.cpp.i
 
-task5.s: task5.cpp.s
+task1_4.s: task1_4.cpp.s
 
-.PHONY : task5.s
+.PHONY : task1_4.s
 
 # target to generate assembly for a file
-task5.cpp.s:
-	$(MAKE) -f CMakeFiles/TP_DATA.dir/build.make CMakeFiles/TP_DATA.dir/task5.cpp.s
-.PHONY : task5.cpp.s
+task1_4.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_1.dir/build.make CMakeFiles/TASK_1.dir/task1_4.cpp.s
+.PHONY : task1_4.cpp.s
+
+task2_1.o: task2_1.cpp.o
+
+.PHONY : task2_1.o
+
+# target to build an object file
+task2_1.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_2.dir/build.make CMakeFiles/TASK_2.dir/task2_1.cpp.o
+.PHONY : task2_1.cpp.o
+
+task2_1.i: task2_1.cpp.i
+
+.PHONY : task2_1.i
+
+# target to preprocess a source file
+task2_1.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_2.dir/build.make CMakeFiles/TASK_2.dir/task2_1.cpp.i
+.PHONY : task2_1.cpp.i
+
+task2_1.s: task2_1.cpp.s
+
+.PHONY : task2_1.s
+
+# target to generate assembly for a file
+task2_1.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_2.dir/build.make CMakeFiles/TASK_2.dir/task2_1.cpp.s
+.PHONY : task2_1.cpp.s
+
+task3_1.o: task3_1.cpp.o
+
+.PHONY : task3_1.o
+
+# target to build an object file
+task3_1.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_3.dir/build.make CMakeFiles/TASK_3.dir/task3_1.cpp.o
+.PHONY : task3_1.cpp.o
+
+task3_1.i: task3_1.cpp.i
+
+.PHONY : task3_1.i
+
+# target to preprocess a source file
+task3_1.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_3.dir/build.make CMakeFiles/TASK_3.dir/task3_1.cpp.i
+.PHONY : task3_1.cpp.i
+
+task3_1.s: task3_1.cpp.s
+
+.PHONY : task3_1.s
+
+# target to generate assembly for a file
+task3_1.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_3.dir/build.make CMakeFiles/TASK_3.dir/task3_1.cpp.s
+.PHONY : task3_1.cpp.s
+
+task4_3.o: task4_3.cpp.o
+
+.PHONY : task4_3.o
+
+# target to build an object file
+task4_3.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_4.dir/build.make CMakeFiles/TASK_4.dir/task4_3.cpp.o
+.PHONY : task4_3.cpp.o
+
+task4_3.i: task4_3.cpp.i
+
+.PHONY : task4_3.i
+
+# target to preprocess a source file
+task4_3.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_4.dir/build.make CMakeFiles/TASK_4.dir/task4_3.cpp.i
+.PHONY : task4_3.cpp.i
+
+task4_3.s: task4_3.cpp.s
+
+.PHONY : task4_3.s
+
+# target to generate assembly for a file
+task4_3.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_4.dir/build.make CMakeFiles/TASK_4.dir/task4_3.cpp.s
+.PHONY : task4_3.cpp.s
+
+task5_3.o: task5_3.cpp.o
+
+.PHONY : task5_3.o
+
+# target to build an object file
+task5_3.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_5.dir/build.make CMakeFiles/TASK_5.dir/task5_3.cpp.o
+.PHONY : task5_3.cpp.o
+
+task5_3.i: task5_3.cpp.i
+
+.PHONY : task5_3.i
+
+# target to preprocess a source file
+task5_3.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_5.dir/build.make CMakeFiles/TASK_5.dir/task5_3.cpp.i
+.PHONY : task5_3.cpp.i
+
+task5_3.s: task5_3.cpp.s
+
+.PHONY : task5_3.s
+
+# target to generate assembly for a file
+task5_3.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_5.dir/build.make CMakeFiles/TASK_5.dir/task5_3.cpp.s
+.PHONY : task5_3.cpp.s
+
+task6_3.o: task6_3.cpp.o
+
+.PHONY : task6_3.o
+
+# target to build an object file
+task6_3.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_6.dir/build.make CMakeFiles/TASK_6.dir/task6_3.cpp.o
+.PHONY : task6_3.cpp.o
+
+task6_3.i: task6_3.cpp.i
+
+.PHONY : task6_3.i
+
+# target to preprocess a source file
+task6_3.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_6.dir/build.make CMakeFiles/TASK_6.dir/task6_3.cpp.i
+.PHONY : task6_3.cpp.i
+
+task6_3.s: task6_3.cpp.s
+
+.PHONY : task6_3.s
+
+# target to generate assembly for a file
+task6_3.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_6.dir/build.make CMakeFiles/TASK_6.dir/task6_3.cpp.s
+.PHONY : task6_3.cpp.s
+
+task7_3.o: task7_3.cpp.o
+
+.PHONY : task7_3.o
+
+# target to build an object file
+task7_3.cpp.o:
+	$(MAKE) -f CMakeFiles/TASK_7.dir/build.make CMakeFiles/TASK_7.dir/task7_3.cpp.o
+.PHONY : task7_3.cpp.o
+
+task7_3.i: task7_3.cpp.i
+
+.PHONY : task7_3.i
+
+# target to preprocess a source file
+task7_3.cpp.i:
+	$(MAKE) -f CMakeFiles/TASK_7.dir/build.make CMakeFiles/TASK_7.dir/task7_3.cpp.i
+.PHONY : task7_3.cpp.i
+
+task7_3.s: task7_3.cpp.s
+
+.PHONY : task7_3.s
+
+# target to generate assembly for a file
+task7_3.cpp.s:
+	$(MAKE) -f CMakeFiles/TASK_7.dir/build.make CMakeFiles/TASK_7.dir/task7_3.cpp.s
+.PHONY : task7_3.cpp.s
 
 # Help Target
 help:
@@ -156,12 +396,36 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... TASK_7"
+	@echo "... TASK_2"
+	@echo "... TASK_3"
 	@echo "... rebuild_cache"
-	@echo "... TP_DATA"
+	@echo "... TASK_1"
+	@echo "... TASK_4"
 	@echo "... edit_cache"
-	@echo "... task5.o"
-	@echo "... task5.i"
-	@echo "... task5.s"
+	@echo "... TASK_6"
+	@echo "... TASK_5"
+	@echo "... task1_4.o"
+	@echo "... task1_4.i"
+	@echo "... task1_4.s"
+	@echo "... task2_1.o"
+	@echo "... task2_1.i"
+	@echo "... task2_1.s"
+	@echo "... task3_1.o"
+	@echo "... task3_1.i"
+	@echo "... task3_1.s"
+	@echo "... task4_3.o"
+	@echo "... task4_3.i"
+	@echo "... task4_3.s"
+	@echo "... task5_3.o"
+	@echo "... task5_3.i"
+	@echo "... task5_3.s"
+	@echo "... task6_3.o"
+	@echo "... task6_3.i"
+	@echo "... task6_3.s"
+	@echo "... task7_3.o"
+	@echo "... task7_3.i"
+	@echo "... task7_3.s"
 .PHONY : help
 
 
