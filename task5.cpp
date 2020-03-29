@@ -80,11 +80,13 @@ void Array<T>::resize() {
 template <typename T>
 void Merge(Array<T> &array, T *buffer, int left, int right, int end, bool (*cmp)(const T&, const T&)) {
     int bufIndex = left;
+    // i - обход по первому подмассиву
+    // j - обход по второму подмассиву
     int i = left;
     int j = right;
 
+    // выбираем меньшие элементы, пока один из подмассивов не закончится
     while (i < right && j < end) {
-        //if (array[i] <= array[j]) {
         if ( cmp(array[i], array[j]) ) {
             buffer[bufIndex] = array[i];
             i++;
@@ -95,11 +97,14 @@ void Merge(Array<T> &array, T *buffer, int left, int right, int end, bool (*cmp)
         bufIndex++;
     }
 
+    // довставляем оставшийся массив
+    // если остались элементы в левом/первом подмассиве...
     while (i < right) {
         buffer[bufIndex] = array[i];
         i++;
         bufIndex++;
     }
+    // ...или втором/правом
     while (j < end) {
         buffer[bufIndex] = array[j];
         j++;
@@ -118,13 +123,14 @@ void MergeSort(Array<T> &array, int size, bool (*cmp)(const T&, const T&)) {
     int right;
     int rightEnd;
 
+    // разбиение на подмассивы 2^k
     for (int k = 1; k < size; k *= 2 ) {
-        //разбиение на подмассивы 2^k
+        // определение границ подмассивов
         for (int left = 0; left + k < size; left += k * 2 ) {
             right = left + k;
             rightEnd = right + k;
 
-            //не выходим за границы подмассива
+            // не выходим за границы подмассива
             if (rightEnd > size) {
                 rightEnd = size;
             }
@@ -134,45 +140,67 @@ void MergeSort(Array<T> &array, int size, bool (*cmp)(const T&, const T&)) {
     }
 }
 
+// ------------------------------------- TASK -----------------------------------------
+template <typename T>
+void createArrayOfPaintedLines(Array<T> &array, Array<T> &paintedArray, int size) {
+    int height = 0;
+
+    for (int i = 0; i < size; i++) {
+        if (array[i].delta == 1) {
+            height++;
+            // если это начало закрашенного отрезка - добавим координату
+            if (height == 1) {
+                paintedArray.insert(array[i]);
+            }
+
+        }
+        if (array[i].delta == -1) {
+            height--;
+            // и добавим место, где закрашенная часть закончилась
+            if (height == 0) {
+                paintedArray.insert(array[i]);
+            }
+        }
+    }
+}
+
+template <typename T>
+int countLengthOfPaintedPart(Array<T> &paintedArray, int size) {
+    int length = 0;
+
+    if (!paintedArray.isEmpty()) {
+        // рассматриваем по паре точек
+        for (int i = 0; i < size; i += 2) {
+            length += paintedArray[i + 1].coord - paintedArray[i].coord;
+        }
+    }
+
+    return length;
+}
+
 int main() {
     int n;
+    std::cin >> n;
 
     Array<Point> array;
+    Array<Point> paintedArray;
     Point point{};
 
-    /*
-    n = 2;
-    auto * arr = new Point[2*n];
-    //std::cin >> n;
+    int length = 0;
 
-    //у каждого отрезка по 2 координаты-точки => 2n
+    // для каждого отрезка 2 точки (начало-конец) => 2n
     for (int i = 0; i < 2 * n; i++) {
-        std::cin >> point;
-        arr[i] = point;
-        array.insert(point);
-    }
-
-    array.show();
-    std::cout<<std::endl;
-
-    arr = MergeSort(arr, 2*n, cmpPoint);
-
-    for (int i = 0; i < 2 * n; i++) {
-        std::cout << arr[i];
-    }
-*/
-
-    for (int i = 0; i < 5; i++) {
         std::cin >> point;
         array.insert(point);
     }
 
-    array.show();
-    std::cout<<std::endl;
+    MergeSort(array, array.getSize(), cmpPoint);
 
-    MergeSort(array, 5, cmpPoint);
+    createArrayOfPaintedLines(array, paintedArray, array.getSize());
 
-    array.show();
+    length = countLengthOfPaintedPart(paintedArray, paintedArray.getSize());
+
+    std::cout << length;
 
     return 0;
 }
