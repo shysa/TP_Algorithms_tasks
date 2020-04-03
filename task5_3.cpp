@@ -5,11 +5,11 @@ struct Point {
     int delta = -1;
 
     friend std::ostream& operator<<(std::ostream &os, const  Point& point) {
-        return std::cout << "[" << point.coord << ":" << point.delta << "]" << " ";
+        return os << "[" << point.coord << ":" << point.delta << "]" << " ";
     }
     friend std::istream& operator>>(std::istream &in, Point& point) {
         point.delta *= -1;
-        return std::cin >> point.coord;
+        return in >> point.coord;
     }
 };
 bool cmpPoint(const Point &l, const Point &r) {
