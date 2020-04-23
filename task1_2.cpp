@@ -3,10 +3,9 @@
 #include <vector>
 
 const int DEFAULT_SIZE = 8;
-const int REHASH_RATIO = 3;
+const float REHASH_RATIO = 0.75;
 
 // берем взаимно простые числа - 127 и 97
-// 127 для того чтобы не было неожиданных неприятностей, если размер кратен 2
 class Hasher {
 private:
     int prime;
@@ -54,6 +53,7 @@ private:
 
     Hasher hasher;
     SecondHasher secondHasher;
+
     int size;
     std::vector<T> table;
 };
@@ -61,7 +61,7 @@ private:
 
 template <typename T, typename Hasher, typename SecondHasher>
 void HashTable<T, Hasher, SecondHasher>::resizeTable() {
-    std::vector<std::string> newTable(table.size() * 2, "NULL");
+    std::vector<T> newTable(table.size() * 2, "NULL");
 
     for (int i = 0; i < table.size(); i++) {
         // для каждой ноды старой таблицы вычисляем хэши в новой таблице
@@ -85,7 +85,7 @@ void HashTable<T, Hasher, SecondHasher>::resizeTable() {
 template <typename T, typename Hasher, typename SecondHasher>
 bool HashTable<T, Hasher, SecondHasher>::Add(const T &key) {
     // если пороговый коэф. заполненности таблицы достигнут, то перехешируем
-    if (size > table.size() * REHASH_RATIO) {
+    if (size + 1 > table.size() * REHASH_RATIO) {
         resizeTable();
     }
     int hash = hasher(key) % table.size();
@@ -129,22 +129,16 @@ bool HashTable<T, Hasher, SecondHasher>::Delete(const T &key) {
 
     while (table[hash] != "NULL" && i < table.size()) {
         if (table[hash] == key) {
-            break;
+            size--;
+            table[hash] = "DEL";
+            return true;
         }
         // иначе проходим по другим возможным хэшам
         hash = (hash + secondHash) % table.size();
         i++;
     }
 
-    // если значения нет и не было - выходим
-    if (table[hash] == "NULL") {
-        return false;
-    }
-
-    size--;
-    table[hash] = "DEL";
-
-    return true;
+    return false;
 }
 
 template <typename T, typename Hasher, typename SecondHasher>
@@ -177,10 +171,8 @@ int main() {
 
     char command;
     std::string str;
-    bool end = false;
 
-    while (!end) {
-        std::cin >> command >> str;
+    while (std::cin >> command >> str) {
         switch (command) {
             case '?': {
                 std::cout << (hTable.Has(str) ? "OK" : "FAIL" ) << std::endl;
@@ -194,16 +186,10 @@ int main() {
                 std::cout << (hTable.Delete(str) ? "OK" : "FAIL" ) << std::endl;
                 break;
             }
-            case 'e' : {
-                end = true;
-                break;
-            }
             default:
                 break;
         }
     }
-
-    hTable.Show();
 
     return 0;
 }
