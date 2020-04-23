@@ -38,21 +38,11 @@ public:
     }
 };
 
-
-template <typename T>
-struct HashTableNode {
-    HashTableNode() : isDel(false) {};
-    HashTableNode(const T& key, HashTableNode<T> *next) : data(key), isDel(false) {}
-
-    T data;
-    bool isDel; //значение удалено? -> чтобы не потерять ноды с таким же хешем
-};
-
 template <typename T, typename Hasher, typename SecondHasher>
 class HashTable {
 public:
-    HashTable(int initial_size = DEFAULT_SIZE) : size(0), table(initial_size, nullptr) {};
-    ~HashTable();
+    HashTable(int initial_size = DEFAULT_SIZE) : size(0), table(initial_size, "NULL") {};
+    ~HashTable() = default;
 
     bool Add(const T& key);
     bool Delete(const T& key);
@@ -65,40 +55,28 @@ private:
     Hasher hasher;
     SecondHasher secondHasher;
     int size;
-    std::vector<HashTableNode<T>*> table;
+    std::vector<T> table;
 };
 
-template <typename T, typename Hasher, typename SecondHasher>
-HashTable<T, Hasher, SecondHasher>::~HashTable() {
-    for (int i = 0; i < table.size(); i++) {
-        HashTableNode<T> *node = table[i];
-        delete node;
-    }
-}
 
 template <typename T, typename Hasher, typename SecondHasher>
 void HashTable<T, Hasher, SecondHasher>::resizeTable() {
-    std::vector<HashTableNode<T>*> newTable(table.size() * 2, nullptr);
+    std::vector<std::string> newTable(table.size() * 2, "NULL");
 
     for (int i = 0; i < table.size(); i++) {
-        HashTableNode<T> *node = table[i];
-
         // для каждой ноды старой таблицы вычисляем хэши в новой таблице
-        if (node != nullptr && !node->isDel) {
-            int newHash = hasher(node->data) % newTable.size();
-            int newSecondHash = secondHasher(node->data) % newTable.size();
-
-            HashTableNode<T> *newNode = newTable[newHash];
+        if (table[i] != "NULL" && table[i] != "DEL") {
+            int newHash = hasher(table[i]) % newTable.size();
+            int newSecondHash = secondHasher(table[i]) % newTable.size();
 
             // если встречаем коллизию в новой таблице по новому хэшу, то опять-таки вставляем с шагом
             int j = 0;
-            while ( newNode != nullptr && j < newTable.size() ) {
+            while ( newTable[j] != "NULL" && j < newTable.size() ) {
                 newHash = (newHash + newSecondHash) % newTable.size();
-                newNode = newTable[newHash];
                 j++;
             }
 
-            newTable[newHash] = node;
+            newTable[newHash] = table[i];
         }
     }
     table = std::move(newTable);
@@ -113,34 +91,30 @@ bool HashTable<T, Hasher, SecondHasher>::Add(const T &key) {
     int hash = hasher(key) % table.size();
     int secondHash = secondHasher(key) % table.size();
 
-    HashTableNode<T> *node = table[hash];
     int i = 0;
     // первое удаленное значение
     int hashDeleted = -1;
 
-    while ( node != nullptr && i < table.size() ) {
+    while ( table[hash] != "NULL" && i < table.size() ) {
         // если при вставке нашли такой же ключ, вернем false
-        if (node->data == key && !node->isDel) {
+        if (table[hash] == key) {
             return false;
         }
         // запоминаем место удаленного значения
-        if (node->isDel && hashDeleted == -1) {
+        if (table[hash] == "DEL" && hashDeleted == -1) {
             hashDeleted = hash;
         }
 
         hash = (hash + secondHash) % table.size();
-        node = table[hash];
         i++;
     }
 
     // если не нашли значение, вместо которого вставлять, то с хэшом все нормально
     // иначе вставить на место удаленного
     if (hashDeleted == -1) {
-        table[hash] = new HashTableNode<T>(key, table[hash]);
+        table[hash] = key;
     } else {
-        node = table[hashDeleted];
-        node->isDel = false;
-        node->data = key;
+        table[hashDeleted] = key;
     }
     size++;
     return true;
@@ -151,27 +125,24 @@ bool HashTable<T, Hasher, SecondHasher>::Delete(const T &key) {
     int hash = hasher(key) % table.size();
     int secondHash = secondHasher(key) % table.size();
 
-    HashTableNode<T> *node = table[hash];
     int i = 0;
 
-    while (node != nullptr && i < table.size()) {
-        // если узел по полученному хэшу не удален и нужный, выходим
-        if ( node->data == key && !node->isDel ) {
+    while (table[hash] != "NULL" && i < table.size()) {
+        if (table[hash] == key) {
             break;
         }
         // иначе проходим по другим возможным хэшам
         hash = (hash + secondHash) % table.size();
-        node = table[hash];
         i++;
     }
 
     // если значения нет и не было - выходим
-    if (node == nullptr) {
+    if (table[hash] == "NULL") {
         return false;
     }
 
     size--;
-    node->isDel = true;
+    table[hash] = "DEL";
 
     return true;
 }
@@ -181,15 +152,13 @@ bool HashTable<T, Hasher, SecondHasher>::Has(const T &key) {
     int hash = hasher(key) % table.size();
     int secondHash = secondHasher(key) % table.size();
 
-    HashTableNode<T> *node = table[hash];
     int i = 0;
 
-    while ( node != nullptr && i < table.size() ) {
-        if (node->data == key && !node->isDel) {
+    while ( table[hash] != "NULL" && i < table.size() ) {
+        if (table[hash] == key) {
             return true;
         }
         hash = (hash + secondHash) % table.size();
-        node = table[hash];
         i++;
     }
     return false;
@@ -197,12 +166,8 @@ bool HashTable<T, Hasher, SecondHasher>::Has(const T &key) {
 
 template<typename T, typename Hasher, typename SecondHasher>
 void HashTable<T, Hasher, SecondHasher>::Show() {
-    HashTableNode<T> *node;
     for (int i = 0; i < table.size(); i++) {
-        node = table[i];
-        if (node != nullptr && !node->isDel) {
-            std::cout << "[" << i << "] : " << node->data << std::endl;
-        }
+        std::cout << "[" << i << "] : " << table[i] << std::endl;
     }
 }
 
