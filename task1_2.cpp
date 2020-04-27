@@ -12,10 +12,10 @@ private:
 public:
     Hasher(int prime = 127): prime(prime){};
 
-    int operator()(const std::string& data) {
+    int operator()(const std::string& data, const int& size) {
         int hash = 0;
-        for (int i = 0; i < data.size(); i++) {
-            hash = hash * prime + data[i];
+        for (char i : data) {
+            hash = (hash * prime + i) % size;
         }
         return hash;
     }
@@ -28,20 +28,30 @@ private:
 public:
     SecondHasher(int prime = 97): prime(prime){};
 
-    int operator()(const std::string& data) {
+    int operator()(const std::string& data, const int& size) {
         int hash = 0;
         for (int i = 0; i < data.size(); i++) {
-            hash = hash * prime + data[i];
+            hash = (hash * prime + data[i]) % size;
         }
-        return hash;
+        return (2 * hash + 1) % size;
     }
 };
+
+
+template <typename T>
+struct HashTableNode {
+    HashTableNode(const T& key) : data(key), isDel(false) {}
+
+    T data;
+    bool isDel; //значение удалено? -> чтобы не потерять ноды с таким же хешем
+};
+
 
 template <typename T, typename Hasher, typename SecondHasher>
 class HashTable {
 public:
-    HashTable(int initial_size = DEFAULT_SIZE) : size(0), table(initial_size, "NULL") {};
-    ~HashTable() = default;
+    HashTable() : size(0), table(DEFAULT_SIZE, nullptr) {};
+    ~HashTable();
 
     bool Add(const T& key);
     bool Delete(const T& key);
@@ -55,87 +65,91 @@ private:
     SecondHasher secondHasher;
 
     int size;
-    std::vector<T> table;
+    std::vector<HashTableNode<T>*> table;
 };
+
+template <typename T, typename Hasher, typename SecondHasher>
+HashTable<T, Hasher, SecondHasher>::~HashTable() {
+    for (int i = 0; i < table.size(); i++) {
+        HashTableNode<T> *node = table[i];
+        delete node;
+    }
+}
 
 
 template <typename T, typename Hasher, typename SecondHasher>
 void HashTable<T, Hasher, SecondHasher>::resizeTable() {
-    std::vector<T> newTable(table.size() * 2, "NULL");
+    // сохраним уже вставленные значения
+    auto temp = std::move(table);
 
-    for (int i = 0; i < table.size(); i++) {
-        // для каждой ноды старой таблицы вычисляем хэши в новой таблице
-        if (table[i] != "NULL" && table[i] != "DEL") {
-            int newHash = hasher(table[i]) % newTable.size();
-            int newSecondHash = secondHasher(table[i]) % newTable.size();
+    // расширим текущую таблицу в два раза
+    table = std::move(std::vector<HashTableNode<T>*>(temp.size() * 2, nullptr));
 
-            // если встречаем коллизию в новой таблице по новому хэшу, то опять-таки вставляем с шагом
-            int j = 0;
-            while ( newTable[j] != "NULL" && j < newTable.size() ) {
-                newHash = (newHash + newSecondHash) % newTable.size();
-                j++;
-            }
+    for (int i = 0; i < temp.size(); i++) {
+        // добавим в новую таблицу старые действующие значения по новым хешам
+        HashTableNode<T> *node = temp[i];
 
-            newTable[newHash] = table[i];
+        if (node != nullptr && !node->isDel) {
+            Add(node->data);
+            // контролируем размер
+            size--;
         }
     }
-    table = std::move(newTable);
 }
+
 
 template <typename T, typename Hasher, typename SecondHasher>
 bool HashTable<T, Hasher, SecondHasher>::Add(const T &key) {
     // если пороговый коэф. заполненности таблицы достигнут, то перехешируем
-    if (size + 1 > table.size() * REHASH_RATIO) {
+    if (size >= table.size() * REHASH_RATIO) {
         resizeTable();
     }
-    int hash = hasher(key) % table.size();
-    int secondHash = secondHasher(key) % table.size();
+    // если при вставке нашли такой же ключ, вернем false
+    if (Has(key)) {
+        return false;
+    }
 
-    int i = 0;
-    // первое удаленное значение
-    int hashDeleted = -1;
+    int secondHash = secondHasher(key, table.size());
+    int firstHash = hasher(key, table.size());
+    int hash = firstHash;
 
-    while ( table[hash] != "NULL" && i < table.size() ) {
-        // если при вставке нашли такой же ключ, вернем false
-        if (table[hash] == key) {
-            return false;
+    for (int i = 0; i < table.size() && table[hash] != nullptr; ++i) {
+
+        if (table[hash]->isDel) {
+            table[hash]->data = key;
+            table[hash]->isDel = false;
+            size++;
+            return true;
         }
-        // запоминаем место удаленного значения
-        if (table[hash] == "DEL" && hashDeleted == -1) {
-            hashDeleted = hash;
-        }
 
-        hash = (hash + secondHash) % table.size();
-        i++;
+        hash = (firstHash + i * secondHash) % table.size();
     }
 
     // если не нашли значение, вместо которого вставлять, то с хэшом все нормально
     // иначе вставить на место удаленного
-    if (hashDeleted == -1) {
-        table[hash] = key;
-    } else {
-        table[hashDeleted] = key;
-    }
+    table[hash] = new HashTableNode<T>(key);
     size++;
     return true;
 }
 
 template <typename T, typename Hasher, typename SecondHasher>
 bool HashTable<T, Hasher, SecondHasher>::Delete(const T &key) {
-    int hash = hasher(key) % table.size();
-    int secondHash = secondHasher(key) % table.size();
+    int secondHash = secondHasher(key, table.size());
+    int firstHash = hasher(key, table.size());
+    int hash = firstHash;
 
-    int i = 0;
+    for (int i = 0; i < table.size(); ++i) {
+        if (table[hash] == nullptr) {
+            return false;
+        }
 
-    while (table[hash] != "NULL" && i < table.size()) {
-        if (table[hash] == key) {
+        if (table[hash]->data == key && !table[hash]->isDel) {
+            table[hash]->isDel = true;
             size--;
-            table[hash] = "DEL";
             return true;
         }
-        // иначе проходим по другим возможным хэшам
-        hash = (hash + secondHash) % table.size();
-        i++;
+
+        hash = (firstHash + i * secondHash) % table.size();
     }
 
     return false;
@@ -143,25 +157,37 @@ bool HashTable<T, Hasher, SecondHasher>::Delete(const T &key) {
 
 template <typename T, typename Hasher, typename SecondHasher>
 bool HashTable<T, Hasher, SecondHasher>::Has(const T &key) {
-    int hash = hasher(key) % table.size();
-    int secondHash = secondHasher(key) % table.size();
+    int secondHash = secondHasher(key, table.size());
+    int firstHash = hasher(key, table.size());
+    int hash = firstHash;
 
     int i = 0;
 
-    while ( table[hash] != "NULL" && i < table.size() ) {
-        if (table[hash] == key) {
+    while (table[hash] != nullptr && i < table.size()) {
+        if (table[hash]->data == key && !table[hash]->isDel) {
             return true;
         }
-        hash = (hash + secondHash) % table.size();
+
         i++;
+        hash = (firstHash + i * secondHash) % table.size();
     }
+
     return false;
 }
 
 template<typename T, typename Hasher, typename SecondHasher>
 void HashTable<T, Hasher, SecondHasher>::Show() {
     for (int i = 0; i < table.size(); i++) {
-        std::cout << "[" << i << "] : " << table[i] << std::endl;
+        HashTableNode<T> *node = table[i];
+        if (node != nullptr && !node->isDel) {
+            std::cout << "[" << i << "] : " << node->data << std::endl;
+        }
+        if (node != nullptr && node->isDel) {
+            std::cout << "[" << i << "] : " << node->data << " DEL" << std::endl;
+        }
+        if (node == nullptr) {
+            std::cout << "[" << i << "] : " << "NULL" << std::endl;
+        }
     }
 }
 
@@ -176,14 +202,17 @@ int main() {
         switch (command) {
             case '?': {
                 std::cout << (hTable.Has(str) ? "OK" : "FAIL" ) << std::endl;
+                hTable.Show();
                 break;
             }
             case '+': {
                 std::cout << (hTable.Add(str) ? "OK" : "FAIL" ) << std::endl;
+                hTable.Show();
                 break;
             }
             case '-': {
                 std::cout << (hTable.Delete(str) ? "OK" : "FAIL" ) << std::endl;
+                hTable.Show();
                 break;
             }
             default:
