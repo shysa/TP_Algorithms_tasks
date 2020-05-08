@@ -93,7 +93,7 @@ private:
             return new Node(data);
         }
 
-        node->nodes++;
+        (node->nodes)++;
 
         if (cmp(data, node->data)) {
             // итоговая позиция точно не меньше чем nodes(right) + 1
@@ -106,18 +106,7 @@ private:
         return doBalance(node);
     }
 
-    /*Node* findAndRemoveMin(Node *node) {
-        while (node->left) {
-            node = node->left;
-        }
-
-        if (!node->left) {
-            return node->right;
-        }
-        node->left = findAndRemoveMin(node->left);
-        return doBalance(node);
-    }*/
-
+    // =============================================================================================
     Node* findMin(Node *node) {
         while (node->left) {
             node = node->left;
@@ -130,34 +119,53 @@ private:
             return node->right;
         }
         node->left = removeMin(node->left);
-        node->nodes--;
+        (node->nodes)--;
 
         return doBalance(node);
     }
+
+    Node* findMax(Node *node) {
+        while (node->right) {
+            node = node->right;
+        }
+        return node;
+    }
+
+    Node* removeMax(Node *node) {
+        if (!node->right) {
+            return node->left;
+        }
+        node->right = removeMax(node->right);
+        (node->nodes)--;
+
+        return doBalance(node);
+    }
+    // =============================================================================================
+
 
     Node* removeInternal(Node *node, const int& position) {
         if (!node) {
             return nullptr;
         }
 
+        // ввели несуществующую позицию
         if (position >= node->nodes) {
             return node;
         }
 
         int current = 0;
-        std::stack<Node *> nodes;
 
         while (true) {
             int nodes_right = getNodes(node->right);
 
+            // выбираем где искать позицию, в правом или левом поддереве
             if (position - current > nodes_right) {
-                nodes.push(node);
                 node = node->left;
+                // ставим текущую позицию для пересчета искомой position
                 current += nodes_right + 1;
             }
             else if (position - current < nodes_right) {
                 if (node->right) {
-                    nodes.push(node);
                     node = node->right;
                 } else {
                     break;
@@ -170,85 +178,34 @@ private:
 
                 delete node;
 
-                // если у удаляемого элемента не было правого и левого потомков,
-                // то просто поправим предыдущий узел
                 if (!right) {
-                    if (!left) {
-                        // берем предыдущий пройденный узел
-                        if (!nodes.empty()) {
-                            node = nodes.top();
-                            nodes.pop();
-
-                            // чистим связи на удаленный узел
-                            if (node->data > key) {
-                                node->left = nullptr;
-                            } else {
-                                node->right = nullptr;
-                            }
-                            // и корректируем показатель nodes
-                            node->nodes--;
-                        } else {
-                            return nullptr;
-                        }
-                    } else {
-                        // если был левый потомок, встаем на него
-                        node = left;
-                    }
+                    return left;
                 } else {
-                    // если правый потомок существует, то заменяем на минимальный из правого поддерева
-                    Node *min = findMin(right);
-                    min->right = removeMin(right);
-                    min->left = left;
+                    // иначе если есть оба потомка, то выбираем, на какой элемент заменить
+                    if (getHeight(right) > getHeight(left)) {
+                        // если правое поддерево глубже, то заменяем на минимальный из правого поддерева
+                        Node *min = findMin(right);
+                        min->right = removeMin(right);
+                        min->left = left;
 
-                    fixNodes(min);
-                    return doBalance(min);
+                        fixNodes(min);
+                        return doBalance(min);
+                    } else {
+                        // иначе заменяем на максимальный из левого
+                        Node *max = findMax(left);
+                        max->left = removeMax(left);
+                        max->right = right;
+
+                        fixNodes(max);
+                        return doBalance(max);
+                    }
                 }
+
                 break;
             }
         }
 
-        // исправляем nodes у всех пройденных узлов
-        while (!nodes.empty()) {
-            Node *tmp = nodes.top();
-            node->nodes--;
-
-            if (tmp->data > node->data) {
-                tmp->left = node;
-            } else {
-                tmp->right = node;
-            }
-
-            node = doBalance(node);
-            nodes.pop();
-        }
-
-        return node;
-
-        /*
-
-        if (cmp(node->data, data)) {
-            node->right = removeInternal(node->right, data);
-        } else if (!cmp(node->data, data) && node->data != data) {
-            node->left = removeInternal(node->left, data);
-        } else {
-            Node *left = node->left;
-            Node *right = node->right;
-
-            delete node;
-
-            if (!right) {
-                return left;
-            }
-
-
-            //Node *min = findAndRemoveMin(right);
-            Node *min = findMin(right);
-            min->right = removeMin(right);
-            min->left = left;
-
-            return doBalance(min);
-        }
-        return doBalance(node);*/
+        return doBalance(node);
     }
 
     void destroyTree(Node *node) {
@@ -267,27 +224,11 @@ public:
 
     comparator cmp;
 
-    bool Has(const T& data);
     void Add(const T& data, int& position);
     void Remove(const int& position);
 };
 
 // ----------------------------------------------------------------------------
-template<typename T, typename comparator>
-bool AVLTree<T, comparator>::Has(const T &data) {
-    Node *tmp = root;
-    while (tmp) {
-        if (tmp->data == data) {
-            return true;
-        } else if (cmp(tmp->data, data)) {
-            tmp = tmp->right;
-        } else {
-            tmp = tmp->left;
-        }
-    }
-    return false;
-}
-
 template<typename T, typename comparator>
 void AVLTree<T, comparator>::Add(const T &data, int& position) {
     root = addInternal(root, data, position);
@@ -297,8 +238,6 @@ template<typename T, typename comparator>
 void AVLTree<T, comparator>::Remove(const int& position) {
     root = removeInternal(root, position);
 }
-
-
 // ----------------------------------------------------------------------------
 
 int main() {
