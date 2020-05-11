@@ -4,7 +4,7 @@
 #include <vector>
 
 // ----------------- AVL TREE ---------------------------------------------------------------
-template <typename T, typename comparator = std::less<T>>
+template <typename T, typename comparator = std::greater<T>>
 class AVLTree {
     struct Node {
         Node(const T& data): data(data), left(nullptr), right(nullptr), height(1), nodes(1) {};
@@ -96,7 +96,7 @@ private:
 
         (node->nodes)++;
 
-        if (cmp(data, node->data)) {
+        if (cmp(node->data, data)) {
             // итоговая позиция точно не меньше чем size(right) + [size(root)=1]
             position += getNodes(node->right) + 1;
             node->left = addInternal(node->left, data, position);
@@ -159,13 +159,10 @@ private:
     }
 
 
-    Node* removeInternal(Node *node, const int& position) {
+    Node* removeInternal(Node *node, const T& key) {
         if (!node) {
             return nullptr;
         }
-
-        // сначала находим ключ, который надо удалить по позиции, заодно пересчитаем nodes у пройденных узлов
-        T key = findAndFixNodes(root, position);
 
         // выбираем, в каком поддереве найденный ранее нужный ключ
         if (node->data < key) {
@@ -179,11 +176,8 @@ private:
 
             delete node;
 
-            if (!right && left) {
+            if (!right) {
                 return left;
-            }
-            if (!left && right) {
-                return right;
             }
 
             // иначе если есть оба потомка, то выбираем, на какой элемент заменить
@@ -193,7 +187,6 @@ private:
                 min->right = removeMin(right);
                 min->left = left;
 
-                fixNodes(min);
                 return doBalance(min);
             } else {
                 // иначе заменяем на максимальный из левого
@@ -201,10 +194,8 @@ private:
                 max->left = removeMax(left);
                 max->right = right;
 
-                fixNodes(max);
                 return doBalance(max);
             }
-
         }
 
         return doBalance(node);
@@ -238,7 +229,9 @@ void AVLTree<T, comparator>::Add(const T &data, int& position) {
 
 template<typename T, typename comparator>
 void AVLTree<T, comparator>::Remove(const int& position) {
-    root = removeInternal(root, position);
+    // сначала находим ключ, который надо удалить по позиции, заодно пересчитаем nodes у пройденных узлов
+    T key = findAndFixNodes(root, position);
+    root = removeInternal(root, key);
 }
 // ----------------------------------------------------------------------------
 
