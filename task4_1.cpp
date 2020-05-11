@@ -10,10 +10,12 @@ class AVLTree {
         Node(const T& data): data(data), left(nullptr), right(nullptr), height(1), nodes(1) {};
 
         T data;
-        int nodes; // кол-во узлов
         Node *left;
         Node *right;
         size_t height;
+
+        // позиция
+        int nodes;
     };
 private:
     Node *root;
@@ -34,10 +36,6 @@ private:
         node->nodes = getNodes(node->left) + getNodes(node->right) + 1;
     }
     // ----------------------------------------------------------------------------
-
-    int getBalance(Node *node) {
-        return getHeight(node->right) - getHeight(node->left);
-    }
 
     Node* rotateLeft(Node *node) {
         Node *tmp = node->right;
@@ -67,22 +65,25 @@ private:
         return tmp;
     }
 
+    int getBalance(Node *node) {
+        return getHeight(node->right) - getHeight(node->left);
+    }
+
     Node* doBalance(Node *node) {
         fixHeight(node);
+        fixNodes(node);
 
         switch (getBalance(node)) {
             case 2:
                 if (getBalance(node->right) < 0) {
                     node->right = rotateRight(node->right);
-                    return rotateLeft(node);
                 }
-                break;
+                return rotateLeft(node);
             case -2:
                 if (getBalance(node->left) > 0) {
                     node->left = rotateLeft(node->left);
-                    return rotateRight(node);
                 }
-                break;
+                return rotateRight(node);
             default:
                 return node;
         }
@@ -96,7 +97,7 @@ private:
         (node->nodes)++;
 
         if (cmp(data, node->data)) {
-            // итоговая позиция точно не меньше чем nodes(right) + 1
+            // итоговая позиция точно не меньше чем size(right) + [size(root)=1]
             position += getNodes(node->right) + 1;
             node->left = addInternal(node->left, data, position);
         } else {
@@ -142,67 +143,68 @@ private:
     }
     // =============================================================================================
 
+    T findAndFixNodes(Node *node, const int& position) {
+        // выбираем где искать позицию, в правом или левом поддереве
+        if (position < getNodes(node->right)) {
+            (node->nodes)--;
+            return findAndFixNodes(node->right, position);
+        }
+        // пересчитываем искомую позицию: position - size(right) - [size(root)=1]
+        if (position > getNodes(node->right)) {
+            (node->nodes)--;
+            return findAndFixNodes(node->left, position - getNodes(node->right) - 1);
+        }
+
+        return node->data;
+    }
+
 
     Node* removeInternal(Node *node, const int& position) {
         if (!node) {
             return nullptr;
         }
 
-        // ввели несуществующую позицию
-        if (position >= node->nodes) {
-            return node;
-        }
+        // сначала находим ключ, который надо удалить по позиции, заодно пересчитаем nodes у пройденных узлов
+        T key = findAndFixNodes(root, position);
 
-        int current = 0;
+        // выбираем, в каком поддереве найденный ранее нужный ключ
+        if (node->data < key) {
+            node->right = removeInternal(node->right, key);
+        } else if (node->data > key) {
+            node->left = removeInternal(node->left, key);
+        } else {
+            // нашли нужную позицию для удаления
+            Node *left = node->left;
+            Node *right = node->right;
 
-        while (true) {
-            int nodes_right = getNodes(node->right);
+            delete node;
 
-            // выбираем где искать позицию, в правом или левом поддереве
-            if (position - current > nodes_right) {
-                node = node->left;
-                // ставим текущую позицию для пересчета искомой position
-                current += nodes_right + 1;
+            if (!right && left) {
+                return left;
             }
-            else if (position - current < nodes_right) {
-                if (node->right) {
-                    node = node->right;
-                } else {
-                    break;
-                }
+            if (!left && right) {
+                return right;
+            }
+
+            // иначе если есть оба потомка, то выбираем, на какой элемент заменить
+            if (getHeight(right) > getHeight(left)) {
+                // если правое поддерево глубже, то заменяем на минимальный из правого поддерева
+                Node *min = findMin(right);
+                min->right = removeMin(right);
+                min->left = left;
+
+                fixNodes(min);
+                return doBalance(min);
             } else {
-                // нашли нужную позицию для удаления
-                Node *left = node->left;
-                Node *right = node->right;
-                int key = node->data;
+                // иначе заменяем на максимальный из левого
+                Node *max = findMax(left);
+                max->left = removeMax(left);
+                max->right = right;
 
-                delete node;
-
-                if (!right) {
-                    return left;
-                } else {
-                    // иначе если есть оба потомка, то выбираем, на какой элемент заменить
-                    if (getHeight(right) > getHeight(left)) {
-                        // если правое поддерево глубже, то заменяем на минимальный из правого поддерева
-                        Node *min = findMin(right);
-                        min->right = removeMin(right);
-                        min->left = left;
-
-                        fixNodes(min);
-                        return doBalance(min);
-                    } else {
-                        // иначе заменяем на максимальный из левого
-                        Node *max = findMax(left);
-                        max->left = removeMax(left);
-                        max->right = right;
-
-                        fixNodes(max);
-                        return doBalance(max);
-                    }
-                }
-
-                break;
+                fixNodes(max);
+                return doBalance(max);
             }
+
         }
 
         return doBalance(node);
@@ -276,11 +278,3 @@ int main() {
 
     return 0;
 }
-
-
-
-
-
-
-
-
