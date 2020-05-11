@@ -2,7 +2,7 @@
 #include <stack>
 
 template <typename T = int, typename comparator = std::less_equal<T>>
-class AVLTree {
+class BinaryTree {
     struct Node {
         Node(const T& data): data(data), left(nullptr), right(nullptr) {};
 
@@ -36,8 +36,8 @@ private:
     }
 
 public:
-    AVLTree(): root(nullptr) {};
-    ~AVLTree() {
+    BinaryTree(): root(nullptr) {};
+    ~BinaryTree() {
         destroyTree(root);
     }
 
@@ -49,13 +49,13 @@ public:
 
 
 template<typename T, typename comparator>
-void AVLTree<T, comparator>::Add(const T &data) {
+void BinaryTree<T, comparator>::Add(const T &data) {
     addInternal(root, data);
 }
 
 // Прямой обход: корень - левое поддерево - правое поддерево
 template<typename T, typename comparator>
-void AVLTree<T, comparator>::preOrder() {
+void BinaryTree<T, comparator>::preOrder() {
     std::stack<Node*> stack;
     std::stack<Node*> output;
 
@@ -83,7 +83,7 @@ void AVLTree<T, comparator>::preOrder() {
 // ----------------------------------------------------------------------------
 
 int main() {
-    AVLTree<> binaryTree;
+    BinaryTree<> binaryTree;
 
     int value = -1;
     int n = 0;
@@ -99,11 +99,3 @@ int main() {
 
     return 0;
 }
-
-
-
-
-
-
-
-
