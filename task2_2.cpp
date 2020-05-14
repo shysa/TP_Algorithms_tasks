@@ -14,24 +14,46 @@ private:
     Node *root;
 
     void destroyTree(Node *node) {
-        if (node) {
-            destroyTree(node->left);
-            destroyTree(node->right);
-            delete node;
+        if (!node) {
+            return;
+        } else {
+            std::stack<Node*> nodes;
+            nodes.push(node);
+
+            while (!nodes.empty()) {
+                node = nodes.top();
+                nodes.pop();
+
+                if (node->right != nullptr) {
+                    nodes.push(node->right);
+                }
+                if (node->left != nullptr) {
+                    nodes.push(node->left);
+                }
+
+                delete node;
+            }
         }
     }
 
-    void addInternal(Node* &node, const T& data) {
+    void addInternal(Node* node, const T& data) {
+        Node *tmp = new Node(data);
+
         if (!node) {
-            node = new Node(data);
+            root = tmp;
             return;
         }
+
         // root->key <= K - в правое поддерево
         // иначе в левое
+        while ( (cmp(node->data, tmp->data) && node->right) || (!cmp(node->data, tmp->data) && node->left) ) {
+            node = cmp(node->data, tmp->data) ? node->right : node->left;
+        }
+
         if ( cmp(node->data, data) ) {
-            addInternal(node->right, data);
+            node->right = tmp;
         } else {
-            addInternal(node->left, data);
+            node->left = tmp;
         }
     }
 
