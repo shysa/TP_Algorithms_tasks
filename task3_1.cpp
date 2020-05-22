@@ -5,47 +5,93 @@
 template <typename T = int, typename comparator = std::less_equal<T>>
 class BinaryTree {
     struct Node {
-        Node(const T& data): data(data), left(nullptr), right(nullptr) {};
+        Node(const T& data): data(data), left(nullptr), right(nullptr), height(1) {};
 
         T data;
         Node *left;
         Node *right;
+        int height;
     };
 private:
     Node *root;
 
     void destroyTree(Node *node) {
-        if (node) {
-            destroyTree(node->left);
-            destroyTree(node->right);
-            delete node;
+        if (!node) {
+            return;
+        } else {
+            std::stack<Node*> nodes;
+            nodes.push(node);
+
+            while (!nodes.empty()) {
+                node = nodes.top();
+                nodes.pop();
+
+                if (node->right != nullptr) {
+                    nodes.push(node->right);
+                }
+                if (node->left != nullptr) {
+                    nodes.push(node->left);
+                }
+
+                delete node;
+            }
         }
     }
 
-    void addInternal(Node* &node, const T& data) {
+    void addInternal(Node* node, const T& data) {
+        Node *tmp = new Node(data);
+
         if (!node) {
-            node = new Node(data);
+            root = tmp;
             return;
         }
+
         // root->key <= K - в правое поддерево
         // иначе в левое
+        // ищем нужное место, заодно высчитывая высоту
+        while ( (cmp(node->data, tmp->data) && node->right) || (!cmp(node->data, tmp->data) && node->left) ) {
+            node = cmp(node->data, tmp->data) ? node->right : node->left;
+            (tmp->height)++;
+        }
+
+        (tmp->height)++;
         if ( cmp(node->data, data) ) {
-            addInternal(node->right, data);
+            node->right = tmp;
         } else {
-            addInternal(node->left, data);
+            node->left = tmp;
         }
     }
 
     int getDepthInternal(BinaryTree::Node *node) {
+        int maxHeight = 0;
+
+        std::stack<Node*> nodes;
+
         if (!node) {
             return 0;
         } else {
-            int depthLeft = getDepthInternal(node->left);
-            int depthRight = getDepthInternal(node->right);
+            nodes.push(node);
 
-            return 1 + std::max(depthLeft, depthRight);
+            while (!nodes.empty()) {
+                node = nodes.top();
+                nodes.pop();
+
+                if (node->right != nullptr) {
+                    nodes.push(node->right);
+                }
+                if (node->left != nullptr) {
+                    nodes.push(node->left);
+                }
+
+                if (maxHeight < node->height) {
+                    maxHeight = node->height;
+                }
+            }
         }
+
+        return maxHeight;
     }
+
 
 public:
     BinaryTree(): root(nullptr) {};
@@ -186,6 +232,6 @@ int main() {
 
     std::cout << std::abs(binaryTree.getDepth() - decartTree.getDepth());
 
+
     return 0;
 }
-
