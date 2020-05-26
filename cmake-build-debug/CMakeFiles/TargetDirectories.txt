@@ -1,4 +1,0 @@
-C:/Users/Administrator/CLionProjects/TP_Algorithms_tasks/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Administrator/CLionProjects/TP_Algorithms_tasks/cmake-build-debug/CMakeFiles/TASK_1.dir
-C:/Users/Administrator/CLionProjects/TP_Algorithms_tasks/cmake-build-debug/CMakeFiles/TASK_5.dir
-C:/Users/Administrator/CLionProjects/TP_Algorithms_tasks/cmake-build-debug/CMakeFiles/rebuild_cache.dir

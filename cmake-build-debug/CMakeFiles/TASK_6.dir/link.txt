@@ -1,3 +1,0 @@
-"F:\CLion\CLion 2019.2\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\TASK_6.dir/objects.a
-"C:\Program Files\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe" cr CMakeFiles\TASK_6.dir/objects.a @CMakeFiles\TASK_6.dir\objects1.rsp
-"C:\Program Files\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE" -g   -Wl,--whole-archive CMakeFiles\TASK_6.dir/objects.a -Wl,--no-whole-archive  -o TASK_6.exe -Wl,--out-implib,libTASK_6.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TASK_6.dir\linklibs.rsp
